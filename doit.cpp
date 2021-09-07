@@ -14,23 +14,25 @@ using namespace std;
 #include <string.h>
 #include <vector>
 
-char* globalPrompt;
-int backgroundProcessCount = 0;
-vector <int> backgroundProcessIds;
-vector <int> backgroundProcessNumbers;
-vector <string> commandNames;
+char* globalPrompt; // stores current prompt in use
+int backgroundProcessCount = 0; // stores the number of background process created in total
+vector <int> backgroundProcessIds; // stores the pids of all current background processes
+vector <int> backgroundProcessNumbers; // stores the count of each current background process ([1], [2], [3]) for display
+vector <string> commandNames; // stores the name of the command for each current background process
+vector <timeval> backgroundStartTimes; // stores the start wallclock time for each current background process
+vector <rusage> backgroundRUsages; // stores the rusage value for each current background process
 
 extern char **environ;		/* environment info */
 
-double timevalToMilliseconds(timeval t){
+double timevalToMilliseconds(timeval t){ // Converts timeval struct to pure milliseconds
     return t.tv_sec * 1000 + t.tv_usec * 0.001;
 }
 
-double datetimeToWallclock(timeval start, timeval end){
+double datetimeToWallclock(timeval start, timeval end){ // converts timeval struct into a wallclock time
     return (end.tv_sec - start.tv_sec) * 1000 + (end.tv_usec - start.tv_usec) * 0.001;
 }
 
-void printStatistics(rusage usage, timeval startTime, timeval endTime){
+void printStatistics(rusage usage, timeval startTime, timeval endTime){ // prints all statistics for the process execution of command
     struct timeval userTime = usage.ru_utime;
     struct timeval systemTime = usage.ru_stime;
 
@@ -42,45 +44,79 @@ void printStatistics(rusage usage, timeval startTime, timeval endTime){
     cout << " - Voluntary Context Switches: " << usage.ru_nvcsw << "\n";
     cout << " - Major Page Faults: " << usage.ru_majflt << "\n";
     cout << " - Minor Page Faults: " << usage.ru_minflt << "\n";
-    cout << " - Maximum Resident Set Size used: " << usage.ru_maxrss << "\n";
+    cout << " - Maximum Resident Set Size used: " << usage.ru_maxrss << "\n\n";
     cout.flush();
 }
 
+void checkBackgroundTaskState(){ // checks the current state of all background tasks
+    for(int i = 0; i < backgroundProcessIds.size(); i++){
+        if(waitpid(backgroundProcessIds[i], 0, WNOHANG) == backgroundProcessIds[i]){ // if a task has finished execution
+            cout << "[" << backgroundProcessNumbers[i] << "] " << backgroundProcessIds[i] << " Completed" << "\n"; // Print Completion
+            cout.flush();
+
+            // delete the processes from the current processes
+            backgroundProcessIds.erase(backgroundProcessIds.begin() + i);
+            backgroundProcessNumbers.erase(backgroundProcessNumbers.begin() + i);
+            commandNames.erase(commandNames.begin() + i);
+
+            struct timeval endTime;
+            gettimeofday(&endTime, NULL);
+
+            // print statistics of that background process
+            printStatistics(backgroundRUsages[i], backgroundStartTimes[i], endTime);
+        }
+    }
+}
+
+// creates a fork and executes a command
 void forkAndRunCommand(char **argvNew, rusage *usage, timeval *startTime, timeval *endTime){
     int pid;
+    gettimeofday(startTime, NULL);
+
     if ((pid = fork()) < 0) {
         cerr << "Fork error\n";
         exit(1);
     } else if (pid == 0) {
         /* child process */
-        gettimeofday(startTime, NULL);
         if (execvp(argvNew[0], argvNew) < 0) {
             cerr << "Execvp error\n";
             exit(1);
         }
         getrusage(RUSAGE_SELF, usage);
+        cout.flush();
 
     } else {
         /* parent */
-        wait(0);        /* wait for the child to finish */
+        cout.flush();
+        wait(0);       /* wait for the child to finish */
         gettimeofday(endTime, NULL);
     }
 }
 
+// creates the shell like behavior
 void shellLine(char *prompt){
+
     char* cmd = new char[32];
     cout << prompt;
-    cin.getline(cmd, 32);
+    cout.flush();
+
+    checkBackgroundTaskState(); // check on background processes continually
+
+    cin.getline(cmd, 128);
+
+    checkBackgroundTaskState(); // check on background processes continually
 
     char *argvNew[32];
     int counter = 0;
 
     char* args = strtok(cmd, " ");
 
+    // exit if prompted to do so TODO add background compeltion
     if(strcmp(args, "exit") == 0){
         exit(0);
     }
 
+    // separate into args
     while (args != NULL)
     {
         //printf ("%s\n",args);
@@ -89,6 +125,7 @@ void shellLine(char *prompt){
         args = strtok (NULL, " ");
     }
 
+    // handling the set prompt keyword
     if(argvNew[0] != NULL && strcmp(argvNew[0], "set") == 0
         && argvNew[1] != NULL && strcmp(argvNew[1], "prompt") == 0
             && argvNew[2] != NULL && strcmp(argvNew[2], "=") == 0 ) {
@@ -99,6 +136,7 @@ void shellLine(char *prompt){
         }
     }
 
+    // handling the change directory keyword
     if(argvNew[0] != NULL && strcmp(argvNew[0], "cd") == 0) {
         if(argvNew[1] != NULL){
             char s[100];
@@ -112,39 +150,64 @@ void shellLine(char *prompt){
         argvNew[i] = NULL;
     }
 
-    if(strcmp(argvNew[counter-1], "&") == 0) { // Background Task
+    // Background Task
+    if(strcmp(argvNew[counter-1], "&") == 0) {
+
         argvNew[counter-1] = NULL;
         int pid;
         backgroundProcessCount++;
-        int storedPid = 0;
+
+        // structs for stats
+        struct rusage backgroundUsage;
+        getrusage(RUSAGE_SELF, &backgroundUsage);
+        struct timeval backgroundStartTime;
+        gettimeofday(&backgroundStartTime, NULL);
+
+        backgroundStartTimes.push_back(backgroundStartTime);
+
         if ((pid = fork()) < 0) {
             cerr << "Fork error\n";
             exit(1);
         } else if (pid == 0) {
             /* child process */
+
+            // move process group id, so the child becomes run in the background.
             setpgid(0, 0);
-            cout << "[" << backgroundProcessCount << "] " << getpid() << " " << argvNew[0] << "\n";
             cout.flush();
 
             if (execvp(argvNew[0], argvNew) < 0) {
                 cerr << "Execvp error\n";
                 exit(1);
             }
+
+            getrusage(RUSAGE_SELF, &backgroundUsage);
+
         } else {
+            // parent process pushes values for tracking the background tasks progression
             backgroundProcessIds.push_back(pid);
             backgroundProcessNumbers.push_back(backgroundProcessCount);
             commandNames.push_back(argvNew[0]);
+            backgroundRUsages.push_back(backgroundUsage);
+
+            checkBackgroundTaskState();
+            cout << "[" << backgroundProcessCount << "] " << pid << " " << argvNew[0] << "\n";
+
         }
         return;
     }
 
+    // jobs functionality
     if(strcmp(argvNew[0], "jobs") == 0){
+
+        // update background tasks, then print all background processes
+        checkBackgroundTaskState();
         for(int i = 0; i < backgroundProcessIds.size(); i++){
             cout << "[" << backgroundProcessNumbers[i] << "] " << backgroundProcessIds[i] << " " << commandNames[i] << "\n";
         }
         return;
     }
 
+    // average functionality (no special keywords or background tasks)
     struct timeval startTime;
     struct timeval endTime;
 
@@ -154,6 +217,8 @@ void shellLine(char *prompt){
     struct rusage usage;
     getrusage(RUSAGE_SELF, &usage);
 
+    checkBackgroundTaskState();
+
     forkAndRunCommand(argvNew, &usage, &startTime, &endTime);
 
     printStatistics(usage, startTime, endTime);
@@ -162,11 +227,14 @@ void shellLine(char *prompt){
 main(int argc, char *argv[]) {
 /* argc -- number of arguments */
 /* argv -- an array of strings */
+    // Shell behavior
     if(argc == 1){ // Shell / Part 2
         globalPrompt= "==>";
         while(true){
             shellLine(globalPrompt);
         }
+
+    // one execute
     } else {
         struct timeval startTime;
         struct timeval endTime;
