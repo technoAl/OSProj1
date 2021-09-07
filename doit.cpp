@@ -2,6 +2,42 @@
 // Created by alexander on 8/31/21.
 //
 
+/*
+ Features Tested in script file
+ ./doit <arg>
+ - tested on ls
+ - tested on ls -a
+ - tested on wc foo.txt
+ - tested on grep -c "hi" foo.txt
+ - tested on date
+ - test on date | grep -c Tue
+
+ Basic Shell
+ - Tested on ls
+ - tested on ls -a
+ - tested on wc foo.txt
+ - tested on grep -c "hi" foo.txt
+ - tested on date
+ - tested on change prompt "UwUhello:"
+ - tested on cd ..
+ - tested on exit
+ * all done in succession
+
+ Background Tasks
+ - tested sleep 5 & then jobs then ls
+ - tested sleep 5 & then attempt to exit
+ - tested multiple sleeps and jobs
+ - test wc foo.txt & sleep 20 & ls -l & jobs & exit
+ */
+
+/*
+My SHELL vs. Linux Shell
+    When running these commands the majority of the functionality is the same. Obviously linux doesn't provide statistics for every command
+    Even the | works, which is pretty cool. The difference mostly appears in the background tasks.
+    In linux shell, the task does not state completion, which was a feature I had to implement. However, the output ina background process can still jumble
+    with the current shell. Overall the shell that I made isn't perfect and polished like the linux one, but it functionally does the same thing.
+
+ */
 
 #include <iostream>
 using namespace std;
@@ -103,6 +139,10 @@ void shellLine(char *prompt){
     checkBackgroundTaskState(); // check on background processes continually
 
     cin.getline(cmd, 128);
+    if(cin.eof()){
+        cout << "EOF Detected";
+        exit(0);
+    }
 
     checkBackgroundTaskState(); // check on background processes continually
 
@@ -111,9 +151,14 @@ void shellLine(char *prompt){
 
     char* args = strtok(cmd, " ");
 
-    // exit if prompted to do so TODO add background compeltion
+    // exit if prompted to do so
     if(strcmp(args, "exit") == 0){
-        exit(0);
+        if(backgroundProcessIds.size() == 0){
+            exit(0);
+        } else {
+            cout << "Wait for all background processes to end.\n";
+            return;
+        }
     }
 
     // separate into args

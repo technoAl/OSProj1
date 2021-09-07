@@ -1,0 +1,347 @@
+Script started on 2021-09-07 01:47:12-04:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="80" LINES="24"]
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit ls
+[?2004l
+a.out		   CMakeLists.txt  doit.cpp  record.txt
+cmake-build-debug  doit		   foo.txt   typescript
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 2.504 milliseconds 
+ - Walk Clock Time Spent: 16.869 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 0
+ - Major Page Faults: 0
+ - Minor Page Faults: 139
+ - Maximum Resident Set Size used: 2320
+
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit ls -a
+[?2004l
+.   a.out	       CMakeLists.txt  doit.cpp  .git	record.txt
+..  cmake-build-debug  doit	       foo.txt	 .idea	typescript
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 2.461 milliseconds 
+ - Walk Clock Time Spent: 2.462 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 139
+ - Maximum Resident Set Size used: 2320
+
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit wc foo.txt
+[?2004l
+ 14  73 465 foo.txt
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.024 milliseconds 
+ - Walk Clock Time Spent: 3.296 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 0
+ - Major Page Faults: 0
+ - Minor Page Faults: 140
+ - Maximum Resident Set Size used: 2320
+
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit gep -c[1@r[C[C[C[C[C ""h"i"[C foo.tx 
+t
+[?2004l
+2
+
+Statistics:
+ - System CPU Time Used: 3.724 milliseconds 
+ - User CPU Time Used: 0 milliseconds 
+ - Walk Clock Time Spent: 3.734 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 0
+ - Major Page Faults: 0
+ - Minor Page Faults: 140
+ - Maximum Resident Set Size used: 2320
+ 
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit cat foo.txt | less
+Hi
+
+Lorem ipsum dolor sit amet, consectetur 
+adipiscing elit, sed do eiusmod tempor incididunt ut 
+labore et dolore magna aliqua. Ut enim ad minim veniam, 
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat c
+
+hi
+
+upidatat non proident, 
+sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+hi
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 2.465 milliseconds 
+ - Walk Clock Time Spent: 2.161 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 2
+ - Major Page Faults: 1
+ - Minor Page Faults: 178
+ 
+ [?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ date./doit date | grep -c Tue
+ 1
+
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ date
+[?2004l
+Tue Sep  7 01:47:53 AM EDT 2021
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit
+[?2004l
+==>ls
+a.out		   CMakeLists.txt  doit.cpp  record.txt
+cmake-build-debug  doit		   foo.txt   typescript
+
+Statistics:
+ - System CPU Time Used: 8.313 milliseconds 
+ - User CPU Time Used: 0 milliseconds 
+ - Walk Clock Time Spent: 4.198 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 144
+ - Maximum Resident Set Size used: 2320
+
+==>ls -a
+.   a.out	       CMakeLists.txt  doit.cpp  .git	record.txt
+..  cmake-build-debug  doit	       foo.txt	 .idea	typescript
+
+Statistics:
+ - System CPU Time Used: 8.313 milliseconds 
+ - User CPU Time Used: 1.183 milliseconds 
+ - Walk Clock Time Spent: 2.512 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 3
+ - Major Page Faults: 0
+ - Minor Page Faults: 160
+ - Maximum Resident Set Size used: 2320
+
+==>wc foo.txt
+ 14  73 465 foo.txt
+
+Statistics:
+ - System CPU Time Used: 8.313 milliseconds 
+ - User CPU Time Used: 1.648 milliseconds 
+ - Walk Clock Time Spent: 2.953 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 5
+ - Major Page Faults: 0
+ - Minor Page Faults: 170
+ - Maximum Resident Set Size used: 2320
+
+==>grep -c ""^[[D      "hi" foo.txt
+0
+
+Statistics:
+ - System CPU Time Used: 8.313 milliseconds 
+ - User CPU Time Used: 2.082 milliseconds 
+ - Walk Clock Time Spent: 3.953 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 7
+ - Major Page Faults: 0
+ - Minor Page Faults: 180
+ - Maximum Resident Set Size used: 3676
+
+==>date
+Tue Sep  7 01:48:25 AM EDT 2021
+
+Statistics:
+ - System CPU Time Used: 8.313 milliseconds 
+ - User CPU Time Used: 2.601 milliseconds 
+ - Walk Clock Time Spent: 2.288 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 9
+ - Major Page Faults: 0
+ - Minor Page Faults: 190
+ - Maximum Resident Set Size used: 3676
+
+==>set prompt - = ""  UwUhello:
+UwUhello:cd ..
+Current Directory is Changed to /home/alexander/Desktop.
+UwUhello:exit
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit
+[?2004l
+==>sleep 5 & 
+[1] 15698 sleep
+==>jobs
+[1] 15698 sleep
+==>ls
+a.out		   CMakeLists.txt  doit.cpp  record.txt
+cmake-build-debug  doit		   foo.txt   typescript
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 5.034 milliseconds 
+ - Walk Clock Time Spent: 3.86 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 3
+ - Major Page Faults: 0
+ - Minor Page Faults: 157
+ - Maximum Resident Set Size used: 2320
+
+==>ls -a
+[1] 15698 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 9890.29 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+.   a.out	       CMakeLists.txt  doit.cpp  .git	record.txt
+..  cmake-build-debug  doit	       foo.txt	 .idea	typescript
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 5.695 milliseconds 
+ - Walk Clock Time Spent: 2.913 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 5
+ - Major Page Faults: 0
+ - Minor Page Faults: 172
+ - Maximum Resident Set Size used: 3672
+
+==>sleep 5 &
+[2] 15702 sleep
+==>exit
+Wait for all background processes to end.
+==>jobs
+[2] 15702 sleep
+==>sleep 20 &
+[2] 15702 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 33925 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+[3] 15703 sleep
+==>sleep 10 &
+[4] 15705 sleep
+==>jobs
+[3] 15703 sleep
+[4] 15705 sleep
+==>sleep 30 &
+[5] 15706 sleep
+==>jobs
+[3] 15703 sleep
+[4] 15705 sleep
+[5] 15706 sleep
+==>wc foo.txt
+[3] 15703 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 56935 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+[4] 15705 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 56935 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+ 14  73 465 foo.txt
+
+Statistics:
+ - System CPU Time Used: 8.348 milliseconds 
+ - User CPU Time Used: 8.348 milliseconds 
+ - Walk Clock Time Spent: 2.409 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 17
+ - Major Page Faults: 0
+ - Minor Page Faults: 228
+ - Maximum Resident Set Size used: 3672
+
+==>jobs
+[5] 15706 sleep
+==>jobs
+[5] 15706 sleep
+==>jobs      wc foo.txt &
+[5] 15706 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 80260.1 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+[6] 15718 wc
+==> 14  73 465 foo.txt
+sleep 20 &
+[6] 15718 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 85756 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+[7] 15741 sleep
+==>ls -a
+.   a.out	       CMakeLists.txt  doit.cpp  .git	record.txt
+..  cmake-build-debug  doit	       foo.txt	 .idea	typescript
+
+Statistics:
+ - System CPU Time Used: 21.922 milliseconds 
+ - User CPU Time Used: 8.768 milliseconds 
+ - Walk Clock Time Spent: 3.408 milliseconds
+ - Involuntary Context Switches: 1
+ - Voluntary Context Switches: 25
+ - Major Page Faults: 0
+ - Minor Page Faults: 259
+ - Maximum Resident Set Size used: 3676
+
+==>jobs
+[7] 15741 sleep
+==>exit
+Wait for all background processes to end.
+==>exit 
+[7] 15741 Completed
+
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 4.585 milliseconds 
+ - Walk Clock Time Spent: 110783 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 1
+ - Major Page Faults: 0
+ - Minor Page Faults: 142
+ - Maximum Resident Set Size used: 2320
+
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ exit
+[?2004l
+exit
+
+Script done on 2021-09-07 01:50:48-04:00 [COMMAND_EXIT_CODE="0"]

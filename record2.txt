@@ -1,0 +1,41 @@
+Script started on 2021-09-07 01:54:04-04:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="80" LINES="24"]
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ exit./doit [K[K[K[K[K[K[Kdate[Kexit[Kexit[Kdate./doit grep -c "hi" foo.txt[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K/doit cat foo.txt | less
+[?2004l[?1049h[22;0;0t[?1h=Hi
+
+Lorem ipsum dolor sit amet, consectetur 
+adipiscing elit, sed do eiusmod tempor incididunt ut 
+labore et dolore magna aliqua. Ut enim ad minim veniam, 
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat c
+
+hi
+
+upidatat non proident, 
+sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+hi
+Statistics:
+ - System CPU Time Used: 0 milliseconds 
+ - User CPU Time Used: 2.465 milliseconds 
+ - Walk Clock Time Spent: 2.161 milliseconds
+ - Involuntary Context Switches: 0
+ - Voluntary Context Switches: 2
+ - Major Page Faults: 1
+ - Minor Page Faults: 178
+:[K[K[?1l>[?1049l[23;0;0t[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ d[K./doit date | grep Tuesdat [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kt
+[?2004l[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit date | grep Tuesdat [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-Tuesdat[A]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CcTuesdat[A]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C Tuesdat[A]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+[?2004l0
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ ./doit date | grep -c Tuesdat[Ky
+[?2004l0
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ date
+[?2004lTue Sep  7 01:55:38 AM EDT 2021
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ date./doit date | grep -c Tuesday[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ke
+[?2004l1
+[?2004h]0;alexander@alexander-VirtualBox: ~/Desktop/ForkProject[01;32malexander@alexander-VirtualBox[00m:[01;34m~/Desktop/ForkProject[00m$ exit
+[?2004lexit
+
+Script done on 2021-09-07 01:58:24-04:00 [COMMAND_EXIT_CODE="0"]
