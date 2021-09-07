@@ -12,9 +12,13 @@ using namespace std;
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <vector>
 
 char* globalPrompt;
 int backgroundProcessCount = 0;
+vector <int> backgroundProcessIds;
+vector <int> backgroundProcessNumbers;
+vector <string> commandNames;
 
 extern char **environ;		/* environment info */
 
@@ -112,6 +116,7 @@ void shellLine(char *prompt){
         argvNew[counter-1] = NULL;
         int pid;
         backgroundProcessCount++;
+        int storedPid = 0;
         if ((pid = fork()) < 0) {
             cerr << "Fork error\n";
             exit(1);
@@ -120,14 +125,22 @@ void shellLine(char *prompt){
             setpgid(0, 0);
             cout << "[" << backgroundProcessCount << "] " << getpid() << " " << argvNew[0] << "\n";
             cout.flush();
+
             if (execvp(argvNew[0], argvNew) < 0) {
                 cerr << "Execvp error\n";
                 exit(1);
             }
-
         } else {
-            /* parent */
-            wait(0);        /* wait for the child to finish */
+            backgroundProcessIds.push_back(pid);
+            backgroundProcessNumbers.push_back(backgroundProcessCount);
+            commandNames.push_back(argvNew[0]);
+        }
+        return;
+    }
+
+    if(strcmp(argvNew[0], "jobs") == 0){
+        for(int i = 0; i < backgroundProcessIds.size(); i++){
+            cout << "[" << backgroundProcessNumbers[i] << "] " << backgroundProcessIds[i] << " " << commandNames[i] << "\n";
         }
         return;
     }
